@@ -3,14 +3,17 @@ import { useParams } from 'react-router-dom'
 import { useEffect,useReducer } from 'react'
 import { Dna } from  'react-loader-spinner'
 import axios from 'axios'
+import { ArrowLeft } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { getError } from '../utils'
 const reducer=(state,action)=>{
   switch(action.type){
     case "FETCH_REQUEST":
       return {...state,loading:true}
     case "FETCH_SUCCESS":
-      return{...state, product:action.payload,loading:false}
+      return{...state,loading:false, product:action.payload}
     case "FETCH_FAIL":
-      return {...state, error:action.payload,loading:false}
+      return {...state,loading:false, error:action.payload}
     default: return state
   }
 }
@@ -29,7 +32,7 @@ const Product = () => {
           const result = await axios(`/api/products/slug/${slug}`);
          dispatch({type:"FETCH_SUCCESS",payload:result.data});
         } catch (error) {
-          dispatch({type:"FETCH_ERROR",payload:error.message});
+          dispatch({type:"FETCH_FAIL",payload:getError(error)});
          
         }
       }
@@ -47,7 +50,27 @@ const Product = () => {
   wrapperStyle={{}}
   wrapperClass="dna-wrapper"
 /></div>
-  ) : error ?(<div>Error</div>):(
+  ) : error ? (<div className="py-10">
+  <div className="text-center">
+    <h1 className="mt-2 text-3xl font-bold tracking-tight text-black sm:text-5xl">
+      {error}
+    </h1>
+    <p className="mt-4 text-base leading-7 text-gray-600">
+      Sorry, we couldn&apos;t find the product you&apos;re looking for.
+    </p>
+    <div className="mt-4 flex items-center justify-center gap-x-3">
+      <Link to="/">
+      <button
+        type="button"
+        className="inline-flex items-center rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+      >
+        <ArrowLeft size={16} className="mr-2" />
+        Go back
+      </button>
+      </Link>
+    </div>
+  </div>
+</div>):(
     <div className="mx-auto max-w-7xl px-4 md:px-8 2xl:px-16">
       <div className="block grid-cols-9 items-start gap-x-10 pb-10 pt-7 lg:grid lg:pb-14 xl:gap-x-14 2xl:pb-20">
         <div className="col-span-5 grid grid-cols-2 gap-2.5">
