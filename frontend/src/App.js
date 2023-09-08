@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Product from './components/Product'
 import Footer from './components/Footer'
 import { Navbar } from './components/Navbar'
+import Cart from './components/Cart'
 function App() {
 
 
@@ -14,6 +15,7 @@ function App() {
      <main>
       <Routes>
         <Route path='/product/:slug' element={<Product/>}/>
+        <Route path='/cart' element={<Cart/>}/>
         <Route path="/" element={<Home/>}/>
       </Routes>
       </main>

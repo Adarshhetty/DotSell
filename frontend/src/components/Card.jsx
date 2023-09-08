@@ -12,7 +12,7 @@ export function Card({name,img,title,price,slug}) {
       <div className="p-4">
       <div className=''>
       <h1 className="text-lg font-semibold">{name}</h1>
-      <strong>${price}</strong>
+      <strong>₹{price}</strong>
       </div>
         <p className="mt-2 text-sm text-gray-600">
          {title}

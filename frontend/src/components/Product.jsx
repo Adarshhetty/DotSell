@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect,useReducer } from 'react'
 import { Dna } from  'react-loader-spinner'
 import axios from 'axios'
@@ -19,6 +19,7 @@ const reducer=(state,action)=>{
   }
 }
 const Product = () => {
+   const navigate=useNavigate()
     const params=useParams()
     const {slug}=params
     const [{loading,product,error},dispatch]=useReducer(reducer,{
@@ -41,15 +42,20 @@ const Product = () => {
     }, [slug]);
     const {state,dispatch:ctxDispatch}=useContext(Store);
     const {cart}=state;
+   const [count,setCount]=useState(1);
     const addToCartHandler=async()=>{
       const existItem=cart.cartItems.find((item)=>item._id===product._id)
-      const quantity=existItem?existItem.quantity+1:1
-      ctxDispatch({type:'CART_ADD_ITEM',payload:{...product,quantity}})
+      const quantity=existItem?existItem.quantity:1
+      
       const {data}=await axios.get(`/api/products/${product._id}`)
+     
       if(data.countInStock<quantity){
         window.alert("Product is out of stock")
         return;
     }
+    
+    ctxDispatch({type:'CART_ADD_ITEM',payload:{...product,quantity:count}})
+    navigate('/cart')
   }
   return loading ? (
     <div className='flex-col  items-center'>
@@ -109,10 +115,10 @@ const Product = () => {
             </p>
             <div className="mt-5 flex items-center ">
               <div className="text-heading pr-2 text-base font-bold md:pr-0 md:text-xl lg:pr-2 lg:text-2xl 2xl:pr-0 2xl:text-4xl">
-                ${product.price}
+              ₹{product.price}
               </div>
               <span className="font-segoe pl-2 text-sm text-gray-400 line-through md:text-base lg:text-lg xl:text-xl">
-                ${product.crossPrice}
+              ₹{product.crossPrice}
               </span>
             </div>
           </div>
@@ -138,14 +144,15 @@ const Product = () => {
             <div className="group flex h-11 flex-shrink-0 items-center justify-between overflow-hidden rounded-md border border-gray-300 md:h-12">
               <button
                 className="text-heading hover:bg-heading flex h-full w-10 flex-shrink-0 items-center justify-center border-e border-gray-300 transition duration-300 ease-in-out focus:outline-none md:w-12"
-               
+               onClick={()=>setCount(count+1)} disabled={count===product.countInStock}
               >
                 +
               </button>
               <span className="duration-250 text-heading flex h-full w-12  flex-shrink-0 cursor-default items-center justify-center text-base font-semibold transition-colors ease-in-out  md:w-20 xl:w-24">
-                1
+                {count}
               </span>
-              <button className="text-heading hover:bg-heading flex h-full w-10 flex-shrink-0 items-center justify-center border-s border-gray-300 transition duration-300 ease-in-out focus:outline-none md:w-12">
+              <button className="text-heading hover:bg-heading flex h-full w-10 flex-shrink-0 items-center justify-center border-s border-gray-300 transition duration-300 ease-in-out focus:outline-none md:w-12"
+               onClick={()=>setCount(count-1)} disabled={count===1}>
                 -
               </button>
             </div>
