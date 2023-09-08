@@ -1,7 +1,10 @@
 'use client'
 
-import React from 'react'
-import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
+import React, { useContext } from 'react'
+import { Menu, X } from 'lucide-react'
+import {GrCart} from "react-icons/gr"
+import { Link } from 'react-router-dom'
+import { Store } from '../Store'
 
 
 const menuItems = [
@@ -11,12 +14,13 @@ const menuItems = [
   },
   {
     name: 'About',
-    to: '#',
+    to: '/about',
   },
   {
     name: 'Contact',
-    to: '#',
+    to: '/contact',
   },
+ 
 ]
 
 export function Navbar() {
@@ -25,7 +29,8 @@ export function Navbar() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-
+ const {state}=useContext(Store);
+ const {cart}=state
   return (
     <div className="relative w-full bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -46,29 +51,39 @@ export function Navbar() {
               />
             </svg>
           </span>
-         <a href='\'>
+         <Link to='\'>
           <span className="font-bold">DotSell</span>
-          </a>
+          </Link>
         </div>
        
         <div className="hidden grow items-start lg:flex">
           <ul className="ml-12 inline-flex space-x-8">
             {menuItems.map((item) => (
               <li key={item.name}>
-                <a
-                  href={item.href}
+                <Link
+                  to={item.to}
                   className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
                 >
                   {item.name}
-                  <span>
-                    <ChevronDown className="ml-2 h-4 w-4" />
-                  </span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </div>
         <div className="hidden space-x-2 lg:block">
+      <Link to="/cart">
+      <button
+            type="button"
+            className="inline-flex rounded-md bg-transparent px-3 py-2  text-2xl font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >
+           <GrCart/>
+           {cart.cartItems.length>0&&(
+           <span class=" items-end justify-center w-4 h-4  text-xs font-semibold text-blue-800 bg-green-200 rounded-full">
+            {cart.cartItems.reduce((acc,c)=>acc+c.quantity,0)}
+         </span>
+           )}
+          </button>
+      </Link>
           <button
             type="button"
             className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -121,22 +136,33 @@ export function Navbar() {
                 <div className="mt-6">
                   <nav className="grid gap-y-4">
                     {menuItems.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.to}
                         className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
                       >
                         <span className="ml-3 text-base font-medium text-gray-900">
                           {item.name}
                         </span>
-                        <span>
-                          <ChevronRight className="ml-3 h-4 w-4" />
-                        </span>
-                      </a>
+                        
+                      </Link>
                     ))}
                   </nav>
                 </div>
                 <div className="mt-2 space-y-2">
+               <Link to="/cart">
+               <button
+                    type="button"
+                    className="flex items-center justify-center  w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                  >
+                    Cart
+                    {cart.cartItems.length>0&&(
+           <span class=" items-end justify-center w-4 h-4  text-xs font-semibold text-blue-800 bg-green-200 rounded-full">
+           {cart.cartItems.reduce((acc,c)=>acc+c.quantity,0)}
+         </span>
+           )}
+                  </button>
+               </Link>
                   <button
                     type="button"
                     className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect,useReducer } from 'react'
 import { Dna } from  'react-loader-spinner'
@@ -6,6 +6,7 @@ import axios from 'axios'
 import { ArrowLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { getError } from '../utils'
+import { Store } from '../Store'
 const reducer=(state,action)=>{
   switch(action.type){
     case "FETCH_REQUEST":
@@ -38,7 +39,18 @@ const Product = () => {
       }
      fetchData();
     }, [slug]);
-    
+    const {state,dispatch:ctxDispatch}=useContext(Store);
+    const {cart}=state;
+    const addToCartHandler=async()=>{
+      const existItem=cart.cartItems.find((item)=>item._id===product._id)
+      const quantity=existItem?existItem.quantity+1:1
+      ctxDispatch({type:'CART_ADD_ITEM',payload:{...product,quantity}})
+      const {data}=await axios.get(`/api/products/${product._id}`)
+      if(data.countInStock<quantity){
+        window.alert("Product is out of stock")
+        return;
+    }
+  }
   return loading ? (
     <div className='flex-col  items-center'>
     <h1>Everything you need in your cart !!!</h1>
@@ -140,7 +152,7 @@ const Product = () => {
             {product.countInStock >0 ?(<button
               type="button"
               className="h-11 w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            >
+             onClick={addToCartHandler}>
               Add to cart
             </button>):(<button
               type="button"
@@ -158,9 +170,9 @@ const Product = () => {
               </li>
               <li>
                 <span className="text-heading inline-block pr-2 font-semibold">Category:</span>
-                <a className="hover:text-heading transition hover:underline" href="#">
+                <Link className="hover:text-heading transition hover:underline" to="/">
                   {product.category}
-                </a>
+                </Link>
               </li>
               <li className="productTags">
                 <span className="text-heading inline-block pr-2 font-semibold">Stock:</span>
@@ -213,4 +225,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default Product;

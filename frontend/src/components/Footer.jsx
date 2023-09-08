@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export function Footer() {
   return (
@@ -6,7 +7,7 @@ export function Footer() {
       <div className="container relative z-10 mx-auto px-4">
         <div className="-m-8 flex flex-wrap items-center justify-between">
           <div className="w-auto p-8">
-            <a href="#">
+            <Link to="#">
               <div className="inline-flex items-center">
                 <svg
                   width="40"
@@ -22,7 +23,7 @@ export function Footer() {
                 </svg>
                 <span className="ml-4 text-lg font-bold">DotSell</span>
               </div>
-            </a>
+            </Link>
           </div>
           <div className="w-auto p-8">
             <h1>Made with ❤️ by Adarsh Shetty</h1> 
@@ -30,7 +31,7 @@ export function Footer() {
           <div className="w-auto p-8">
             <div className="-m-1.5 flex flex-wrap">
               <div className="w-auto p-1.5">
-                <a href="#">
+                <Link to="#">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                     <svg
                       width="8"
@@ -45,10 +46,10 @@ export function Footer() {
                       ></path>
                     </svg>
                   </div>
-                </a>
+                </Link>
               </div>
               <div className="w-auto p-1.5">
-                <a href="#">
+                <Link to="#">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                     <svg
                       width="14"
@@ -63,10 +64,10 @@ export function Footer() {
                       ></path>
                     </svg>
                   </div>
-                </a>
+                </Link>
               </div>
               <div className="w-auto p-1.5">
-                <a href="#">
+                <Link to="#">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                     <svg
                       width="16"
@@ -81,7 +82,7 @@ export function Footer() {
                       ></path>
                     </svg>
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 const data = {
     products: [
-        {
+        {   _id:"1",
             name: 'ACG reversible jacket',
             slug: 'ACG reversible jacket',
             image:['https://cdn-images.farfetch-contents.com/19/75/97/90/19759790_44346228_1000.jpg',
@@ -15,7 +15,7 @@ const data = {
             title: 'Exclusive Nike Jacket for Men',
             description:'ACG reversible jacket from Nike featuring black/multicolour, panelled design, reversible, logo print to the rear, logo print at the sleeve, front zip fastening, long sleeves and straight hem.'
         },
-        {
+        {    _id:"2",
             name: 'ACG reversible jacket',
             slug: 'ACG reversible jacket',
             image:['https://cdn-images.farfetch-contents.com/19/75/97/90/19759790_44346228_1000.jpg',
@@ -30,7 +30,7 @@ const data = {
             title: 'Exclusive Nike Jacket for Men',
             description:'ACG reversible jacket from Nike featuring black/multicolour, panelled design, reversible, logo print to the rear, logo print at the sleeve, front zip fastening, long sleeves and straight hem.'
         },
-        {
+        {    _id:"3",
             name: 'ACG reversible jacket',
             slug: 'ACG reversible jacket',
             image:['https://cdn-images.farfetch-contents.com/19/75/97/90/19759790_44346228_1000.jpg',
@@ -46,7 +46,7 @@ const data = {
             title: 'Exclusive Nike Jacket for Men',
             description:'ACG reversible jacket from Nike featuring black/multicolour, panelled design, reversible, logo print to the rear, logo print at the sleeve, front zip fastening, long sleeves and straight hem.'
         },
-        {
+        {    _id:"4",
             name: 'ACG reversible jacket',
             slug: 'ACG reversible jacket',
             image:['https://cdn-images.farfetch-contents.com/19/75/97/90/19759790_44346228_1000.jpg',
