@@ -1,6 +1,6 @@
 const data = {
     products: [
-        {   _id:"1",
+        {  // _id:"1",
             name: 'ACG reversible jacket',
             slug: 'ACG reversible jacket',
             image:['https://cdn-images.farfetch-contents.com/19/75/97/90/19759790_44346228_1000.jpg',
@@ -16,7 +16,7 @@ const data = {
             title: 'Exclusive Nike Jacket for Men',
             description:'ACG reversible jacket from Nike featuring black/multicolour, panelled design, reversible, logo print to the rear, logo print at the sleeve, front zip fastening, long sleeves and straight hem.'
         },
-        {    _id:"2",
+        {//_id:"2",
             name: 'Beckenbauer Adicolor  ',
             slug: 'Beckenbauer Adicolor  ',
             image:['https://cdn-images.farfetch-contents.com/20/90/96/76/20909676_51049698_1000.jpg',
@@ -32,7 +32,7 @@ const data = {
             title: 'Exclusive Adicolor Jacket for Men',
             description:'Beckenbauer Adicolor Classic zip-up featuring black/multicolour, panelled design, reversible, logo print to the rear, logo print at the sleeve, front zip fastening, long sleeves and straight hem.'
         },
-        {    _id:"3",
+        {   // _id:"3",
             name: 'Logo-print cotton hoodie',
             slug: 'Logo-print cotton hoodie',
             image:['https://cdn-images.farfetch-contents.com/20/57/74/97/20577497_50596999_1000.jpg',
@@ -48,7 +48,7 @@ const data = {
             title: 'Logo-print cotton hoodie',
             description:'Logo-print cotton hoodie featuring black/multicolour, panelled design, reversible, logo print to the rear, logo print at the sleeve, front zip fastening, long sleeves and straight hem.'
         },
-        {    _id:"4",
+        {  //  _id:"4",
             name: 'Mac80 low-top sneakers',
             slug: 'Mac80 low-top sneakers',
             image:['https://cdn-images.farfetch-contents.com/20/08/03/59/20080359_45116266_1000.jpg',
