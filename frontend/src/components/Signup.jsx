@@ -51,7 +51,7 @@ export function Signup() {
                     type="text"
                     placeholder="Full Name"
                     id="name"
-                  ></input>
+                 required ></input>
                 </div>
               </div>
               <div>
@@ -65,7 +65,7 @@ export function Signup() {
                     type="email"
                     placeholder="Email"
                     id="email"
-                  ></input>
+                 required ></input>
                 </div>
               </div>
               <div>
@@ -81,7 +81,7 @@ export function Signup() {
                     type="password"
                     placeholder="Password"
                     id="password"
-                  ></input>
+                 required ></input>
                 </div>
               </div>
               <div>

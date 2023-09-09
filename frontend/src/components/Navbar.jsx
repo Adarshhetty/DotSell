@@ -1,4 +1,4 @@
-'use client'
+
 
 import React, { useContext } from 'react'
 import { Menu, X } from 'lucide-react'
@@ -84,18 +84,21 @@ export function Navbar() {
            )}
           </button>
       </Link>
-          <button
+         <Link to="/signup">
+         <button
             type="button"
             className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
-            Sign In
-          </button>
-          <button
+            Sign Up
+          </button></Link>
+        <Link to="/signin">
+        <button
             type="button"
             className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
             Log In
           </button>
+        </Link>
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
@@ -163,18 +166,22 @@ export function Navbar() {
            )}
                   </button>
                </Link>
-                  <button
+                <Link to="/signup">
+                <button
                     type="button"
                     className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
-                    Sign In
+                    Sign Up
                   </button>
+                  </Link>
+                  <Link to="/signin">
                   <button
                     type="button"
                     className="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
                     Log In
-                  </button>
+                  </button></Link>
+              
                 </div>
               </div>
             </div>

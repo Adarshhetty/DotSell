@@ -13,7 +13,7 @@ const data = {
             crossPrice:250,
             brand: 'Nike',
             discount:5,
-            title: 'Beckenbauer Adicolor Classic zip-up sweatshirt',
+            title: 'Exclusive Nike Jacket for Men',
             description:'ACG reversible jacket from Nike featuring black/multicolour, panelled design, reversible, logo print to the rear, logo print at the sleeve, front zip fastening, long sleeves and straight hem.'
         },
         {    _id:"2",
@@ -29,7 +29,7 @@ const data = {
             crossPrice:970,
             brand: 'Adidas',
             discount:5,
-            title: 'Exclusive Nike Jacket for Men',
+            title: 'Exclusive Adicolor Jacket for Men',
             description:'Beckenbauer Adicolor Classic zip-up featuring black/multicolour, panelled design, reversible, logo print to the rear, logo print at the sleeve, front zip fastening, long sleeves and straight hem.'
         },
         {    _id:"3",

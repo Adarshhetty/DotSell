@@ -7,7 +7,7 @@ export function Card({name,img,title,price,slug}) {
       <img
         src={img}
         alt="T shirt"
-        className="h-[170px] w-full rounded-md object-cover"
+        className="h-[250px] w-full rounded-md object-cover"
       />
       <div className="p-4">
       <div className=''>
