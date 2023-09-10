@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { Store } from '../Store'
+
 
 export function Signin() {
+  const navigate=useNavigate()
     const {search}=useLocation()
     const redirectInUrl=new URLSearchParams(search).get('redirect')
     const redirect=redirectInUrl?redirectInUrl:'/';
+    const [email,setEmail]=useState('');
+    const [password,setPassword]=useState('');
+    const {state,dispatch:ctxDispatch}=useContext(Store)
+    const submitHandler=async(e)=>{
+      e.preventDefault();
+     try {
+      const {data}= await axios.post('/api/users/signin',{
+        email,
+        password,
+      })
+      console.log(data);
+      ctxDispatch({type:'USER_SIGNIN',payload:data})
+      localStorage.setItem('userInfo',JSON.stringify(data))
+      navigate(redirect||'/')
+     } catch (error) {
+      alert("Invalid username or password")
+      console.log(error);
+     }
+    }
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -37,7 +60,7 @@ export function Signin() {
               Create a free account
             </Link>
           </p>
-          <form action="#" method="POST" className="mt-8">
+          <form onSubmit={submitHandler} action="#"  className="mt-8">
             <div className="space-y-5">
               <div>
                 <label htmlFor="" className="text-base font-medium text-gray-900" >
@@ -49,7 +72,7 @@ export function Signin() {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
-                  required></input>
+                  required onChange={(e)=>setEmail(e.target.value)}></input>
                 </div>
               </div>
               <div>
@@ -64,12 +87,12 @@ export function Signin() {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="password"
                     placeholder="Password"
-                 required ></input>
+                 required onChange={(e)=>setPassword(e.target.value)} ></input>
                 </div>
               </div>
               <div>
                 <button
-                  type="button"
+                  type="submit"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
                   Get started <ArrowRight className="ml-2" size={16} />

@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export function Signup() {
     const {search}=useLocation()
+    const [username,setUsername]=useState('');
+    const [email,setEmail]=useState('');
+    const [password,setPassword]=useState('');
     const redirectInUrl=new URLSearchParams(search).get('redirect')
     const redirect=redirectInUrl?redirectInUrl:'/';
+    const submitHandler=async(e)=>{
+      e.preventDefault();
+      try {
+        const {data}= await axios.post('/api/users/signup',{
+          username,
+          email,
+          password,
+        })
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -38,7 +55,7 @@ export function Signup() {
               Sign In
             </Link>
           </p>
-          <form action="#" method="POST" className="mt-8">
+          <form onSubmit={submitHandler} action="#" method="POST" className="mt-8">
             <div className="space-y-5">
               <div>
                 <label htmlFor="name" className="text-base font-medium text-gray-900">
@@ -51,7 +68,7 @@ export function Signup() {
                     type="text"
                     placeholder="Full Name"
                     id="name"
-                 required ></input>
+                 required onChange={(e)=>setUsername(e.target.value)}></input>
                 </div>
               </div>
               <div>
@@ -65,7 +82,7 @@ export function Signup() {
                     type="email"
                     placeholder="Email"
                     id="email"
-                 required ></input>
+                 required onChange={(e)=>setEmail(e.target.value)}></input>
                 </div>
               </div>
               <div>
@@ -81,12 +98,12 @@ export function Signup() {
                     type="password"
                     placeholder="Password"
                     id="password"
-                 required ></input>
+                 required onChange={(e)=>setPassword(e.target.value)}></input>
                 </div>
               </div>
               <div>
-                <button
-                  type="button"
+                <button 
+                  type="submit"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
                   Create Account <ArrowRight className="ml-2" size={16} />
