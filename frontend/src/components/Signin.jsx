@@ -1,8 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Store } from '../Store'
+import { toast } from 'react-toastify'
+import { getError } from '../utils'
 
 
 export function Signin() {
@@ -13,6 +15,7 @@ export function Signin() {
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     const {state,dispatch:ctxDispatch}=useContext(Store)
+    const {userInfo}=state
     const submitHandler=async(e)=>{
       e.preventDefault();
      try {
@@ -20,15 +23,20 @@ export function Signin() {
         email,
         password,
       })
-      console.log(data);
+     toast.success("Sucessfully signed in")
       ctxDispatch({type:'USER_SIGNIN',payload:data})
       localStorage.setItem('userInfo',JSON.stringify(data))
       navigate(redirect||'/')
      } catch (error) {
-      alert("Invalid username or password")
+      toast.error(getError(error))
       console.log(error);
      }
     }
+    useEffect(() => {
+      if(userInfo)
+      navigate(redirect)
+     
+    }, [navigate,redirect,userInfo]);
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">

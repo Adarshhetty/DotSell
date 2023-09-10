@@ -5,7 +5,8 @@ import { Menu, X } from 'lucide-react'
 import { GrCart } from "react-icons/gr"
 import { Link } from 'react-router-dom'
 import { Store } from '../Store'
-import { MdAccountCircle } from 'react-icons/md'
+
+import DropDownButton from './DropDownButton'
 
 
 const menuItems = [
@@ -21,23 +22,10 @@ const menuItems = [
     name: 'Contact',
     to: '/contact',
   },
+  
 
 ]
-// const userItems = [
-//   {
-//     email: 'user@example.com',
 
-//   },
-//   {
-//     name: 'About',
-//     to: '/about',
-//   },
-//   {
-//     name: 'Contact',
-//     to: '/contact',
-//   },
-
-// ]
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
@@ -45,8 +33,13 @@ export function Navbar() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-  const { state } = useContext(Store);
+  const { state ,dispatch } = useContext(Store);
   const { cart, userInfo } = state
+  const signOutHandler=()=>{
+  dispatch({type:'USER_SIGNOUT'})
+  localStorage.removeItem('userInfo')
+   
+  }
   return (
     <div className="relative w-full bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -67,7 +60,7 @@ export function Navbar() {
               />
             </svg>
           </span>
-          <Link to='\'>
+          <Link to='/'>
             <span className="font-bold">DotSell</span>
           </Link>
         </div>
@@ -86,11 +79,11 @@ export function Navbar() {
             ))}
           </ul>
         </div>
-        <div className="hidden space-x-2 lg:block">
-          <Link to="/cart">
+        
+        <Link to="/cart">
             <button
               type="button"
-              className="inline-flex rounded-md bg-transparent px-3 py-2  text-2xl font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              className="  inline-flex rounded-md bg-transparent px-3 py-2  text-2xl font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
               <GrCart />
               {cart.cartItems.length > 0 && (
@@ -98,33 +91,29 @@ export function Navbar() {
                   {cart.cartItems.reduce((acc, c) => acc + c.quantity, 0)}
                 </span>
               )}
-
-            </button>
-          </Link>
-
-          <button
-            type="button"
-            className="rounded-full border  px-3 py-2 text-xl font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2  hover:bg-gray-200"
-          >
-            <MdAccountCircle />
-          </button>
-
-          <Link to="/signup">
-            <button
-              type="button"
-              className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            >
-              Sign Up
-            </button></Link>
-          <Link to="/signin">
-            <button
-              type="button"
-              className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            >
-              Log In
-            </button>
-          </Link>
-
+               </button>
+              </Link>
+        <div className="hidden  space-x-2 lg:block">
+        {userInfo?(
+          <DropDownButton name={userInfo.name} email={userInfo.email} signOutHandler={signOutHandler} />
+        ):(<div className=' space-x-2'>
+             <Link to="/signin">
+             <button
+               type="button"
+               className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+             >
+               Log In
+             </button>
+           </Link>
+             <Link to="/signup">
+             <button
+               type="button"
+               className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+             >
+               Sign Up
+             </button></Link>
+           </div>
+        )}
 
         </div>
         <div className="lg:hidden">
@@ -179,11 +168,33 @@ export function Navbar() {
                     ))}
                   </nav>
                 </div>
-                <div className="mt-2 space-y-2">
+                <div className=" mt-2 space-y-2">
+                {userInfo?(
+         <div className='flex justify-start items-start mb-2 '> <DropDownButton  name={userInfo.name} email={userInfo.email} signOutHandler={signOutHandler} /></div>
+
+        ):(<div>
+             <Link to="/signin">
+             <button
+               type="button"
+               className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+             >
+               Log In
+             </button>
+           </Link>
+               <Link to="/signup">
+               <button
+                 type="button"
+                 className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+               >
+                 Sign Up
+               </button>
+             </Link>
+             </div>
+        )}
                   <Link to="/cart">
                     <button
                       type="button"
-                      className="flex items-center justify-center  w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                      className=" flex items-center justify-center  w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     >
                       Cart
                       {cart.cartItems.length > 0 && (
@@ -193,21 +204,9 @@ export function Navbar() {
                       )}
                     </button>
                   </Link>
-                  <Link to="/signup">
-                    <button
-                      type="button"
-                      className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                      Sign Up
-                    </button>
-                  </Link>
-                  <Link to="/signin">
-                    <button
-                      type="button"
-                      className="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                      Log In
-                    </button></Link>
+          
+              
+                 
 
                 </div>
               </div>
