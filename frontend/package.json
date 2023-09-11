@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm i && react-scripts build --output public",
+    "build": "PUBLIC_URL=/ react-scripts build ",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
