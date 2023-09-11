@@ -1,28 +1,30 @@
-import express  from "express";
-
-import bodyParser from "body-parser";
+import express from "express";
 import dotenv from 'dotenv'
 import seedRouter from "./routes/seedRoutes.js";
 // import userRouter from "./routes/userRouter.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import InitiateMongoServer from "./config/db.js";
+import path from "path";
 dotenv.config();
 
 InitiateMongoServer();
-const app= express();
+const app = express();
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 
-app.use('/api/seed',seedRouter)
-app.use('/api/products',productRouter)
-app.use('/api/users',userRouter)
-app.use((err,req,res,next)=>{ 
-  res.status(500).send({message:err.message})
+app.use('/api/seed', seedRouter)
+app.use('/api/products', productRouter)
+app.use('/api/users', userRouter)
+const __dirname = path.resolve()
+app.use(express.static(path.join(__dirname, '/frontend/build')))
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '/frontend/index.html')))
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message })
 })
-const port=5000;
+const port = 5000;
 
-app.listen(port,()=>{
-    console.log(`listening on http://localhost:${port}`);
+app.listen(port, () => {
+  console.log(`listening on http://localhost:${port}`);
 })
