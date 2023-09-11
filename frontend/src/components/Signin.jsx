@@ -29,7 +29,7 @@ export function Signin() {
       navigate(redirect||'/')
      } catch (error) {
       toast.error(getError(error))
-      console.log(error);
+      
      }
     }
     useEffect(() => {

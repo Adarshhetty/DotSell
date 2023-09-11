@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 import { Menu, X } from 'lucide-react'
 import { GrCart } from "react-icons/gr"
-import { Link } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import { Store } from '../Store'
 
 import DropDownButton from './DropDownButton'
@@ -28,6 +28,7 @@ const menuItems = [
 
 
 export function Navbar() {
+  const navigate=useNavigate()
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
   const toggleMenu = () => {
@@ -38,7 +39,10 @@ export function Navbar() {
   const signOutHandler=()=>{
   dispatch({type:'USER_SIGNOUT'})
   localStorage.removeItem('userInfo')
-   
+   localStorage.removeItem('shippingAddress')
+   localStorage.removeItem('cartItems')
+   navigate(redirect)
+  
   }
   return (
     <div className="relative w-full bg-white">
@@ -80,7 +84,7 @@ export function Navbar() {
           </ul>
         </div>
         
-        <Link to="/cart">
+        <Link to="/cart" className=' hidden lg:block'>
             <button
               type="button"
               className="  inline-flex rounded-md bg-transparent px-3 py-2  text-2xl font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
