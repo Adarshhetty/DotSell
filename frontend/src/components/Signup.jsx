@@ -1,29 +1,46 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { getError } from '../utils';
+import { Store } from '../Store';
 
 export function Signup() {
+  const navigate=useNavigate()
     const {search}=useLocation()
-    const [username,setUsername]=useState('');
+    const [name,setName]=useState('');
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     const redirectInUrl=new URLSearchParams(search).get('redirect')
     const redirect=redirectInUrl?redirectInUrl:'/';
+    const {state,dispatch:ctxDispatch}=useContext(Store)
+    const {userInfo}=state
     const submitHandler=async(e)=>{
       e.preventDefault();
       try {
         const {data}= await axios.post('/api/users/signup',{
-          username,
+          name,
           email,
           password,
         })
-        
-      } catch (error) {
+        toast.success("Sucessfully signed in")
+        ctxDispatch({type:'USER_SIGNIN',payload:data})
+        localStorage.setItem('userInfo',JSON.stringify(data))
+        navigate(redirect||'/')
+       } catch (error) {
+        toast.error(getError(error))
         console.log(error);
+       }
       }
-    }
+      useEffect(() => {
+        if(userInfo)
+        navigate(redirect)
+       
+      }, [navigate,redirect,userInfo]);
+       
+      
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -68,7 +85,8 @@ export function Signup() {
                     type="text"
                     placeholder="Full Name"
                     id="name"
-                 required onChange={(e)=>setUsername(e.target.value)}></input>
+                    
+                 required onChange={(e)=>setName(e.target.value)}></input>
                 </div>
               </div>
               <div>

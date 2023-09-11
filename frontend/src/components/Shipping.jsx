@@ -256,7 +256,7 @@ const submitHandler=(e)=>{
           {/* Product List */}
           <div className="bg-gray-100 px-5 py-6 md:px-8">
             <div className="flow-root">
-              {cartItems.length==0?(  <Link
+              {cartItems.length===0?(  <Link
                                 to="/"
                                 className="inline-block py-4 text-lg text-gray-600 transition hover:text-gray-700 hover:underline hover:underline-offset-4"
                             >
