@@ -11,6 +11,9 @@ import Signup from './components/Signup'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Shipping from './components/Shipping'
+import Payment from './components/Payment'
+
+
 function App() {
 
 
@@ -24,7 +27,9 @@ function App() {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/signin' element={<Signin/>}/>
         <Route path='/signup' element={<Signup/>}/>
+        
         <Route path='/shipping' element={<Shipping/>}/>
+        <Route path='/payment' element={<Payment/>}/>
         <Route path="/" element={<Home/>}/>
       </Routes>
       </main>

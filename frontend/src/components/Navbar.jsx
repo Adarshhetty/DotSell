@@ -42,7 +42,6 @@ export function Navbar() {
    localStorage.removeItem('shippingAddress')
    localStorage.removeItem('cartItems')
    navigate(redirect)
-  
   }
   return (
     <div className="relative w-full bg-white">

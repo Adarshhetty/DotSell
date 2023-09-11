@@ -8,9 +8,6 @@ import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import InitiateMongoServer from "./config/db.js";
 dotenv.config();
-// mongoose.connect(process.env.MONGODB_URI).then(()=>{
-//   console.log("Connected to DB");
-// }).catch(err => console.log(err.message))
 
 InitiateMongoServer();
 const app= express();

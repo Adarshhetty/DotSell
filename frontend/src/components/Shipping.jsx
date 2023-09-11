@@ -21,6 +21,7 @@ const [addressInfo,setAddressInfo]=useState(shippingAddress.addressInfo||'')
 const [city,setCity]=useState(shippingAddress.city||'')
 const [province,setProvince]=useState(shippingAddress.province||'')
 const [postal,setPostal]=useState(shippingAddress.postal||'')
+
 useEffect(() => {
   if(!userInfo){
     navigate('/signin?redirect=/')
@@ -35,19 +36,15 @@ const submitHandler=(e)=>{
             cardNumber,date,cvcNo,addressInfo,city,province,postal,
         }
     })
-    localStorage.setItem("shippingAddress",
-    JSON.stringify({
-        fullname,
-        cardNumber,date,cvcNo,addressInfo,city,province,postal,
-    }))
-    navigate('/payment')
+   navigate('/payment')
 }
 
   return (
+    
     <div className="mx-auto my-4 max-w-4xl md:my-6">
       <div className="overflow-hidden  rounded-xl shadow">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Contact Info */}
+         
           <div className="px-5 py-6 text-gray-900 md:px-8">
             <div className="flow-root">
               <div className="-my-6 divide-y divide-gray-200">
