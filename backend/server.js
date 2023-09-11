@@ -4,11 +4,19 @@ import seedRouter from "./routes/seedRoutes.js";
 // import userRouter from "./routes/userRouter.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
-import InitiateMongoServer from "./config/db.js";
+
 import path from "path";
+import mongoose from "mongoose";
 dotenv.config();
 
-InitiateMongoServer();
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("connected to db");
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
