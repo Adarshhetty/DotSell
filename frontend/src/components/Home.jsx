@@ -20,6 +20,7 @@ const Home = () => {
     products:[],
     error:""
   });
+  console.log((products));
   useEffect(() => {
     const fetchData=async ()=>{
       dispatch({type:"FETCH_REQUEST"})
