@@ -85,7 +85,7 @@ const Dashboard = () => {
           navigate('/')
     };
     
-    console.log(productData);
+    
     return (
         <div className=''>
             <section className="bg-gray-100  dark:bg-gray-900">

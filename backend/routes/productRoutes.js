@@ -16,7 +16,7 @@ productRouter.post('', async (req, res) => {
 
     // Save the new product to the database
     const savedProduct = await newProduct.save();
-console.log(newProduct);
+
     // Respond with the saved product
     res.status(201).json(savedProduct);
   } catch (error) {
