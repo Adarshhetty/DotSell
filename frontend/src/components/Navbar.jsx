@@ -9,6 +9,8 @@ import { Store } from '../Store'
 import DropDownButton from './DropDownButton'
 
 
+
+
 const menuItems = [
   {
     name: 'Home',
@@ -67,8 +69,9 @@ export function Navbar() {
             <span className="font-bold">DotSell</span>
           </Link>
         </div>
-
-        <div className="hidden grow items-start lg:flex">
+       
+        <div className="hidden grow items-center lg:flex">
+         
           <ul className="ml-12 inline-flex space-x-8">
             {menuItems.map((item) => (
               <li key={item.name}>
@@ -80,9 +83,12 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
-          </ul>
-        </div>
         
+          </ul>
+          
+        </div>
+       
+     
         <Link to="/cart" className=' hidden lg:block'>
             <button
               type="button"
@@ -98,7 +104,7 @@ export function Navbar() {
               </Link>
         <div className="hidden  space-x-2 lg:block">
         {userInfo?(
-          <DropDownButton name={userInfo.name} email={userInfo.email} signOutHandler={signOutHandler} />
+          <DropDownButton name={userInfo.name} email={userInfo.email} isAdmin={userInfo.isAdmin} signOutHandler={signOutHandler} />
         ):(<div className=' space-x-2'>
              <Link to="/signin">
              <button
@@ -173,7 +179,7 @@ export function Navbar() {
                 </div>
                 <div className=" mt-2 space-y-2">
                 {userInfo?(
-         <div className='flex justify-start items-start mb-2 '> <DropDownButton  name={userInfo.name} email={userInfo.email} signOutHandler={signOutHandler} /></div>
+         <div className='flex justify-start items-start mb-2 '> <DropDownButton  name={userInfo.name} email={userInfo.email} isAdmin={userInfo.isAdmin} signOutHandler={signOutHandler} /></div>
 
         ):(<div>
              <Link to="/signin">

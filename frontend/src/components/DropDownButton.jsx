@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 
-export default function DropDownButton({name,email,signOutHandler}) {
+export default function DropDownButton({name,email,isAdmin,signOutHandler}) {
   
  
   
@@ -12,7 +12,7 @@ export default function DropDownButton({name,email,signOutHandler}) {
     <div className="inline-flex mr-12  w-56:lg w-full:sm text-right">
       <Menu as="div" className="relative inline-block text-right">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-5 px-4 py-2 text-sm font-medium text-grey-800 hover:bg-opacity-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-gray-700  px-4 py-2 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             {name}
            
           </Menu.Button>
@@ -27,6 +27,7 @@ export default function DropDownButton({name,email,signOutHandler}) {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="absolute left-0 lg:left-auto lg:right-0   mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
@@ -52,7 +53,23 @@ export default function DropDownButton({name,email,signOutHandler}) {
               </Menu.Item>
             
             </div>
-      
+            {isAdmin?( <div className="px-1 py-1">
+              <Menu.Item>
+                {({ active }) => (
+                  <Link to="/dashboard" >
+                     <button 
+                    className={`${
+                      active ? 'bg-gray-700 text-white' : 'text-gray-900'
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  >
+                  
+                  Dashboard
+                  </button>
+                  </Link>
+                 
+                )}
+              </Menu.Item>
+            </div>):null}
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (

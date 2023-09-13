@@ -72,10 +72,10 @@ export function Cart() {
 
                                                         <div className="mt-1 flex items-end">
                                                             <p className="text-xs font-medium text-gray-500 line-through">
-                                                                ${item.crossPrice}
+                                                            ₹{item.crossPrice}
                                                             </p>
                                                             <p className="text-sm font-medium text-gray-900">
-                                                                &nbsp;&nbsp;${item.price}
+                                                                &nbsp;&nbsp;₹{item.price}
                                                             </p>
                                                             &nbsp;&nbsp;
                                                             <p className="text-sm font-medium text-green-500">{item.discount}%</p>

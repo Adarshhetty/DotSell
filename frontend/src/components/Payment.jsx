@@ -10,14 +10,15 @@ const Payment = () => {
         navigate('/cart')
     }
     const paymentHandler = () => {
-       
+       localStorage.removeItem('cartItems')
+       localStorage.removeItem('shippingAddress')
         toast.success("Payment Successful")
         navigate('/')
     }
     return (
-        <div>
+        <div className='linear-gradient(rgb(17, 24, 39), rgb(75, 85, 99))'>
 
-            <main className=" antialiased bg-gray-200 text-gray-900 font-sans overflow-x-hidden">
+            <main className=" antialiased linear-gradient(rgb(17, 24, 39), rgb(75, 85, 99)) text-gray-900 font-sans overflow-x-hidden">
                 <div className="relative px-4 min-h-screen md:flex md:items-center md:justify-center">
                     <div className="bg-black opacity-25 w-full h-full absolute z-10 inset-0"></div>
                     <div className="bg-white rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
@@ -32,6 +33,7 @@ const Payment = () => {
                             </div>
                         </div>
                         <div className="text-center md:text-right mt-4 md:flex md:justify-end">
+                            
                             <button onClick={paymentHandler} className="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 bg-green-500 text-white rounded-lg font-semibold text-sm md:ml-2 md:order-2">
                                 Proceed to Pay</button>
 

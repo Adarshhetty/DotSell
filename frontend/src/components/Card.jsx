@@ -20,9 +20,9 @@ export function Card({name,img,title,price,slug}) {
         <Link to={`product/${slug}`}>
         <button
           type="button"
-          className=" mt-3 rounded-md bg-black px-2.5 py-2 text-[12px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          className=" mt-3 rounded-md bg-black px-6 py-2 text-[12px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
-          Buy
+          Add to Cart
         </button>
         </Link>
       </div>

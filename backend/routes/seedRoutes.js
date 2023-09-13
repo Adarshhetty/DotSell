@@ -4,6 +4,7 @@ import data from "../data.js";
 import User from "../modals/userModal.js";
 
 const seedRouter = express.Router();
+
 seedRouter.get('/', async (req, res) => {
     await Product.remove({});
     const createdProducts = await Product.insertMany(data.products);
