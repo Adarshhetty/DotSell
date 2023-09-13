@@ -10,11 +10,6 @@ A MERN fashion ecommerce website where you can find collection of clothing,shoes
 You can now find clothing and its matching accessories in this single website.
 
 
-What I learnt:
-
-
-I learnt about integration of frontend and backend. I built frontend using ReactJs library and for frontend I used NodeJs framework.
-
 Installation:
 
 Frontend:
