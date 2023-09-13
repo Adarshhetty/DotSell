@@ -73,8 +73,7 @@ export default function DropDownButton({name,email,isAdmin,signOutHandler}) {
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
-                  <Link to="#signout" onClick={signOutHandler}>
-                     <button 
+                     <button onClick={signOutHandler}
                     className={`${
                       active ? 'bg-gray-700 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -92,7 +91,7 @@ export default function DropDownButton({name,email,isAdmin,signOutHandler}) {
                     )}
                    Sign Out
                   </button>
-                  </Link>
+                  
                  
                 )}
               </Menu.Item>

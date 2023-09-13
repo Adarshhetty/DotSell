@@ -43,7 +43,7 @@ export function Navbar() {
   localStorage.removeItem('userInfo')
    localStorage.removeItem('shippingAddress')
    localStorage.removeItem('cartItems')
-   navigate(redirect)
+   navigate('/')
   }
   return (
     <div className="relative w-full bg-white">
